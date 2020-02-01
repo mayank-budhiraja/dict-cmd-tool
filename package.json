@@ -1,0 +1,19 @@
+{
+  "name": "dict-cmd-tool",
+  "version": "1.0.0",
+  "description": "command-line dictionary tool using fourty-two-words heroku-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayank-budhiraja/dict-cmd-tool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayank-budhiraja/dict-cmd-tool/issues"
+  },
+  "homepage": "https://github.com/mayank-budhiraja/dict-cmd-tool#readme"
+}
