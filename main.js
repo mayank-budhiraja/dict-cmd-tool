@@ -15,10 +15,15 @@ const apikey = 'b972c7ca44dda72a5b482052b1f5e13470e01477f3fb97c85d5313b3c1126270
 */
 
 //6. word of the day (random word)
-
 function randomWord(){
-    const url = URL + '/words/randomWord?api_key=' + apikey
-    request ({url, JSON:true}, (error, body, response) => {resolve(response.word)})
+    const conurl = URL + '/words/randomWord?api_key=' + apikey
+    request ({conurl, JSON:true}, (error, body, response) => {resolve(response.word)})
+}
+
+//1. word definition
+function defword(){
+    const conurl = URL + '/word/' + word + '/definitions?api_key=' + apikey
+    request ({conurl, JSON:true}, (error, body, response) => {resolve(response)})
 }
 
 
