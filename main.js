@@ -23,8 +23,17 @@ function randomWord(){
 //1. word definition
 function defword(){
     const conurl = URL + '/word/' + word + '/definitions?api_key=' + apikey
-    request ({conurl, JSON:true}, (error, body, response) => {resolve(response)})
+    request ({conurl, JSON:true}, 
+                (error, body, response) => {
+                    if (response.error) {
+                        reject("word not in dictionary")
+                    }
+                    else{resolve(response)}
 }
+
+
+
+
 
 
     
