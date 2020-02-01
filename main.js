@@ -4,6 +4,13 @@ const apikey = 'b972c7ca44dda72a5b482052b1f5e13470e01477f3fb97c85d5313b3c1126270
 //const conurl = URL + apikey
 //cannot have a constant URL bcoz of different funcs
 
+let data = {
+    "word": "",
+    "definitons": "",
+    "synonyms": "",
+    "antonyms": "",
+    "examples": "",
+}
 /*total functions
     1. word definitions
     2. word synonyms 
@@ -13,12 +20,6 @@ const apikey = 'b972c7ca44dda72a5b482052b1f5e13470e01477f3fb97c85d5313b3c1126270
     6. word of the day 
     7. Game
 */
-
-//6. word of the day (random word)
-function randomWord(){
-    const conurl = URL + '/words/randomWord?api_key=' + apikey
-    request ({conurl, JSON:true}, (error, body, response) => {resolve(response.word)})
-}
 
 //1. word definition
 function defword(){
@@ -68,8 +69,36 @@ function wordexample(){
         })
 }
 
+//5. full dictionary
+function fulldict(){
+    
+    data.word = word
+    try{
+        data.definitons = defword(word)
+        data.synonyms = wordsyno(word)
+        data.antonyms = wordanto(word)
+        data.examples = wordexample(word)
+    }
+    catch(error){
+        reject("word no in dictionary")
+    }
+    resolve(data)
+}
 
+//6. word of the day (random word)
+function randomWord(){
+    const conurl = URL + '/words/randomWord?api_key=' + apikey
+    request ({conurl, JSON:true}, (error, body, response) => {resolve(response.word)})
+}
 
+module.export = {
+    defword,
+    wordsyno,
+    wordanto,
+    wordexample,
+    randomWord,
+    fulldict
+}
 
 
 
