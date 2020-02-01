@@ -1,5 +1,5 @@
-const program = require('commander'); //packages
-const {prompt} = require('inquirer'); //for CLI app
+const program = require('commander'); //for CLI app
+const {prompt} = require('inquirer'); //for game
 const {defword, wordsyno, wordanto, wordexample, randomWord, fulldict} = require('main.js')
 
 program 
@@ -30,6 +30,45 @@ program
             console.log(data)
         }
     });
+
+//word antonym
+program
+    .command('ant <word>')
+    .action( (word) => {
+        try{
+            let data = wordanto(word)
+            console.log(data)
+        }
+        catch(error){
+            console.log(data)
+        }
+    });
+
+//word examples
+program
+    .command('ex <word>')
+    .action( (word) => {
+        try{
+            let data = wordexample(word)
+            console.log(data)
+        }
+        catch(error){
+            console.log(data)
+        }
+    });
+
+//get some random data without messing above functions
+const randomdata = ()=>{
+    let worddata = randomWord()
+    console.log(wordara)
+    }
+try{
+    randomdata()
+}
+catch(error)
+{
+    console.log(error)
+}
 
 
 

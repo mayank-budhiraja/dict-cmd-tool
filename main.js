@@ -1,4 +1,4 @@
-
+const request = require('request')
 const URL = 'https://fourtytwowords.herokuapp.com/'
 const apikey = 'b972c7ca44dda72a5b482052b1f5e13470e01477f3fb97c85d5313b3c112627073481104fec2fb1a0cc9d84c2212474c0cbe7d8e59d7b95c7cb32a1133f778abd1857bf934ba06647fda4f59e878d164'
 //const conurl = URL + apikey
@@ -22,57 +22,65 @@ let data = {
 */
 
 //1. word definition
-function defword(){
-    const conurl = URL + '/word/' + word + '/definitions?api_key=' + apikey
+const defword = (word) =>{
+    return new Promise((resolve, reject) => 
+    {const conurl = URL + '/word/' + word + '/definitions?api_key=' + apikey
     request ({conurl, JSON:true}, 
                 (error, body, response) => {
                     if (response.error) {
-                        reject("word not in dictionary")
-                    }
+                        reject("word not in dictionary")}
                     else{resolve(response)}
     })
+})
 }
 
 //2. word synonyms
-function wordsyno(){
-    const conurl = URL + '/word/' + word + '/relatedWords?api_key=' + apikey
+const wordsyno = (word) =>{
+    return new Promise((resolve, reject) => 
+    {const conurl = URL + '/word/' + word + '/relatedWords?api_key=' + apikey
     request ({conurl, JSON:true},
-        (error, body, response) => {
-            if (response.error) {
-                reject("word not in dictionary")}
-            else
-                {resolve(response.words)}
+                (error, body, response) => {
+                    if (response.error) {
+                        reject("word not in dictionary")}
+                    else{resolve(response.words)}
     })
+})
 }
 
+
 //3. word antonyms
-function wordanto(){
-    const conurl = URL + '/word/' + word + '/relatedWords?api_key=' + apikey
+const wordanto = (word) =>{
+    return new Promise((resolve, reject) =>
+    {const conurl = URL + '/word/' + word + '/relatedWords?api_key=' + apikey
     request ({conurl, JSON:true},
-        (error, body, response) => {
-            if (response.error) {
-                reject("word not in dictionary")}
-            else 
-                {resolve(response.words)}
+                (error, body, response) => {
+                    if (response.error) {
+                        reject("word not in dictionary")}
+                    else 
+                        {resolve(response.words)}
         })
+})
 }
 
 //4. word examples
-function wordexample(){
-    const conurl = URL + '/word/' + word + '/examples?api_key=' + apikey
+const wordexample = (word) =>{
+    return new Promise((resolve, reject) =>
+    {const conurl = URL + '/word/' + word + '/examples?api_key=' + apikey
     request ({conurl, JSON:true},
-        (error, body, response) => {
-            if (response.error) {
-                reject("word not in dictionary")}
-            else 
-                resolve(response.examples)
+                (error, body, response) => {
+                    if (response.error) {
+                        reject("word not in dictionary")}
+                    else 
+                        resolve(response.examples)
         })
+})
 }
 
 //5. full dictionary
-function fulldict(){
-    
-    data.word = word
+async function fulldict(word){
+    return new Promise((resolve, reject) =>{
+
+    data.word = word //use the parameters
     try{
         data.definitons = defword(word)
         data.synonyms = wordsyno(word)
@@ -82,13 +90,16 @@ function fulldict(){
     catch(error){
         reject("word no in dictionary")
     }
-    resolve(data)
+    resolve(data)   
+    })
 }
 
 //6. word of the day (random word)
 function randomWord(){
+    return new Promise((resolve, reject) => {
     const conurl = URL + '/words/randomWord?api_key=' + apikey
     request ({conurl, JSON:true}, (error, body, response) => {resolve(response.word)})
+    })
 }
 
 module.export = {
