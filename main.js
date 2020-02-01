@@ -29,6 +29,43 @@ function defword(){
                         reject("word not in dictionary")
                     }
                     else{resolve(response)}
+    })
+}
+
+//2. word synonyms
+function wordsyno(){
+    const conurl = URL + '/word/' + word + '/relatedWords?api_key=' + apikey
+    request ({conurl, JSON:true},
+        (error, body, response) => {
+            if (response.error) {
+                reject("word not in dictionary")}
+            else
+                {resolve(response.words)}
+    })
+}
+
+//3. word antonyms
+function wordanto(){
+    const conurl = URL + '/word/' + word + '/relatedWords?api_key=' + apikey
+    request ({conurl, JSON:true},
+        (error, body, response) => {
+            if (response.error) {
+                reject("word not in dictionary")}
+            else 
+                {resolve(response.words)}
+        })
+}
+
+//4. word examples
+function wordexample(){
+    const conurl = URL + '/word/' + word + '/examples?api_key=' + apikey
+    request ({conurl, JSON:true},
+        (error, body, response) => {
+            if (response.error) {
+                reject("word not in dictionary")}
+            else 
+                resolve(response.examples)
+        })
 }
 
 
