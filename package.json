@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/mayank-budhiraja/dict-cmd-tool/issues"
   },
-  "homepage": "https://github.com/mayank-budhiraja/dict-cmd-tool#readme"
+  "homepage": "https://github.com/mayank-budhiraja/dict-cmd-tool#readme",
+  "dependencies": {
+    "commander": "^4.1.0",
+    "core-util-is": "^1.0.2",
+    "inquirer": "^7.0.4",
+    "request": "^2.88.0"
+  }
 }

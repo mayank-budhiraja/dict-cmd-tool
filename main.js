@@ -97,9 +97,27 @@ async function fulldict(word){
 //6. word of the day (random word)
 function randomWord(){
     return new Promise((resolve, reject) => {
-    const conurl = URL + '/words/randomWord?api_key=' + apikey
-    request ({conurl, JSON:true}, (error, body, response) => {resolve(response.word)})
+        const conurl = URL + '/words/randomWord?api_key=' + apikey
+            request ({conurl, JSON:true}, 
+                (error, body, response) =>{
+                    if (!error){
+                     resolve(response.word)
+                 }
     })
+})
+}
+
+//helper functions
+//get details of the random-word
+
+const detailrandomword = async () => {
+    let randomWord = await randomWord()
+    let worddata = await fulldict(randomWord) 
+        return new Promise((resolve, reject) => {
+            if (worddata){
+                resolve(worddata)
+            }
+        })
 }
 
 module.export = {
