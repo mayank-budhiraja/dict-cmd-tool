@@ -21,6 +21,16 @@ let data = {
     7. Game
 */
 
+const detailrandomword = async () => {
+    let randomfull = await getrandomWord()
+    let worddata = await fulldict(randomfull) 
+        return new Promise((resolve, reject) => {
+            if (worddata){
+                resolve(worddata)
+            }
+        })
+    }
+
 //1. word definition
 const defword = (word) =>{
     return new Promise((resolve, reject) => 
@@ -77,6 +87,19 @@ const wordexample = (word) =>{
 }
 
 //5. full dictionary
+const fullgivenword = (word) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let worddata = await fulldict(word)
+            if (worddata) {
+                resolve(worddata)
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 async function fulldict(word){
     return new Promise((resolve, reject) =>{
 
@@ -95,7 +118,7 @@ async function fulldict(word){
 }
 
 //6. word of the day (random word)
-function randomWord(){
+function getrandomWord(){
     return new Promise((resolve, reject) => {
         const conurl = URL + '/words/randomWord?api_key=' + apikey
             request ({conurl, JSON:true}, 
@@ -110,23 +133,14 @@ function randomWord(){
 //helper functions
 //get details of the random-word
 
-const detailrandomword = async () => {
-    let randomWord = await randomWord()
-    let worddata = await fulldict(randomWord) 
-        return new Promise((resolve, reject) => {
-            if (worddata){
-                resolve(worddata)
-            }
-        })
-}
-
 module.export = {
     defword,
     wordsyno,
     wordanto,
     wordexample,
-    randomWord,
-    fulldict
+    getrandomWord,
+    detailrandomword,
+    fullgivenword
 }
 
 

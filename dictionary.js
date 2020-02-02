@@ -1,6 +1,6 @@
 const program = require('commander'); //for CLI app
 //const {prompt} = require('inquirer'); //for game
-const {defword, wordsyno, wordanto, wordexample, randomWord, fulldict} = require('./main.js')
+const {defword, wordsyno, wordanto, wordexample, detailrandomword} = require('./main.js')
 
 program 
     .description('Main')
@@ -58,16 +58,19 @@ program
     });
 
 //get some random data without messing above functions
-const randomdata = async()=>{
-    let worddata = await randomWord() //need a function to get details
+if (process.argv.length==2){
+const randomdata = async ()=>{
+    let worddata = await detailrandomword() //need a function to get details
     console.log(worddata)
     }
-try{
-    randomdata()
-}
-catch(error)
-{
-    console.log(error)
+        try
+        {
+            randomdata()
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
 }
 
 
